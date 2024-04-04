@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Multiplication Table</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .multiplication-table {
+      border-collapse: collapse;
+      margin: 0 auto;
+    }
+
+    .multiplication-table th,
+    .multiplication-table td {
+      border: 1px solid #ddd;
+      text-align: center;
+      vertical-align: middle;
+      padding: 7px; 
+    }
+
+    .even-row td {
+      background-color: lightblue; 
+	  padding: 7px;
+    }
+
+    .odd-row td {
+      background-color: lightgreen; 
+	  padding: 7px;
+    }
+
+    .multiplication-table td {
+      font-size: 16px; 
+    }
+  </style>
+</head>
+<body onload="generateMultiTable()">
+  <script>
+    function isValidInput(value) {
+      return value >= 2 && value <= 10;
+    }
+
+    function generateMultiTable() {
+      let n = 0;
+      while (!isValidInput(n)) {
+        n = parseInt(prompt("Enter a number for rows (between 2-10):"));
+        if (!isValidInput(n)) {
+          alert("Please enter a number between 2 and 10.");
+        }
+      }
+
+      let m = 0;
+      while (!isValidInput(m)) {
+        m = parseInt(prompt("Enter a number for columns (between 2-10):"));
+        if (!isValidInput(m)) {
+          alert("Please enter a number between 2 and 10.");
+        }
+      }
+
+      console.log("Multiplication Table (" + n + "x" + m + "):");
+
+      let tableString = "<table border='1'>";
+
+      for (let i = 1; i <= n; i++) {
+        let rowClass = (i % 2 === 0) ? "even-row" : "odd-row";
+        tableString += "<tr class='" + rowClass + "'>";
+        for (let j = 1; j <= m; j++) {
+          tableString += "<td>" + (i * j) + "</td>"; 
+        }
+        tableString += "</tr>";
+      }
+
+      tableString += "</table>";
+
+      document.getElementById("multiplicationTable").innerHTML = tableString;
+    }
+  </script>
+  <div id="multiplicationTable"></div>
+</body>
+</html>
